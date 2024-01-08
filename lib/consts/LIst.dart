@@ -8,3 +8,8 @@ const socialIconList= [icFacebookLogo, icGoogleLogo, icTwitterLogo];
 const homeSwiperList=[imgSlider1,imgSlider2,imgSlider3,imgSlider4];
 
 const homeSecondSwiperList=[imgSs1,imgSs2,imgSs3,imgSs4];
+
+// we are going to create the featured Lists
+const featuredImg=[imgS1, imgS2, imgS3,imgS4,imgS5,imgS6];
+
+const featuredTitles=[womenDress, girlsDress, girlsWatch, boyGlasses, mobilePhone, tshirts];

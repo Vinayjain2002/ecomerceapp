@@ -31,3 +31,11 @@ const topseller="Top Sellers";
 const topcategory="Top Categories";
 const featuredCategory="Featured Categories";
 
+// we are going to define the variables for the features of the HOme Screen
+const womenDress="Women Dress", girlsWatch="Girls Watches", mobilePhone="Mobile Phones", boyGlasses="Boy's Glasses";
+const tshirts="TShirts";
+const girlsDress="Girls Dresses";
+const featuredProduct="Featured Product";
+
+
+
