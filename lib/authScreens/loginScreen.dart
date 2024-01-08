@@ -1,5 +1,5 @@
 import 'package:emart_app/authScreens/SignUp.dart';
-import 'package:emart_app/consts/IconLIst.dart';
+import 'package:emart_app/consts/LIst.dart';
 import 'package:emart_app/consts/consts.dart';
 import 'package:emart_app/widgetCommon/appLogoWidget.dart';
 import 'package:emart_app/widgetCommon/bgappSmall.dart';

@@ -18,3 +18,16 @@ const namehint="Vinay jain";
 const privacypolicy="Privacy POlicy";
 const terms="Terms and Conditions";
 const alreadyHaveAccount="Already Have an Account ?  ";
+
+const home="Home", category="Categories", cart="Cart", account="Account";
+
+// now we are going to crete the string that will be used in the HomeScreen
+const searchAnything="Search anything...";
+const todaydeal="Today's Deal";
+const flashsale="Flash Sale";
+const topbrand="Top Brands";
+const topseller="Top Sellers";
+
+const topcategory="Top Categories";
+const featuredCategory="Featured Categories";
+

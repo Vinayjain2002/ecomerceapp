@@ -1,3 +1,4 @@
+import 'package:emart_app/views/Screens/Home.dart';
 import 'package:flutter/material.dart';
 import '../consts/colors.dart';
 import '../consts/strings.dart';
@@ -8,16 +9,24 @@ import '../widgetCommon/customTextFIeld.dart';
 import '../widgetCommon/submitButton.dart';
 
 ///this scree is for the purpos eof the signing up to the page
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
-class SignUpScreen extends StatelessWidget {
-   SignUpScreen({super.key});
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  @override
+  bool isChecked=false;
   TextEditingController emailController= TextEditingController();
   TextEditingController passwordController= TextEditingController();
   TextEditingController nameController= TextEditingController();
   TextEditingController retypepasswordController= TextEditingController();
-  @override
+
+
   Widget build(BuildContext context) {
-    return BgAppSmall(
+    return  BgAppSmall(
       context: context,
       //it is the widget that we are going to pass to the Screen.
       childWidget: Scaffold(
@@ -56,61 +65,68 @@ class SignUpScreen extends StatelessWidget {
                         children: <Widget>[
                           Checkbox(
                             value: false,
-                            onChanged: (newvalue){},
+                            onChanged: (newvalue){
+                              setState(() {
+                                isChecked=true;
+                              });
+                            },
                             checkColor: redColor,
                           ) ,
 
                           const SizedBox(width: 5,),
                           Expanded(
                             child: RichText(text: const TextSpan(
-                              children: [
-                                TextSpan(text: "I agree to the ", style: TextStyle(
-                                  fontFamily: bold,
-                                  color: Colors.grey,
+                                children: [
+                                  TextSpan(text: "I agree to the ", style: TextStyle(
+                                    fontFamily: regular,
+                                    color: Colors.grey,
 
-                                )),
+                                  )),
 
-                                TextSpan(text: terms, style: TextStyle(
-                                  fontFamily: bold,
-                                  color: redColor,
-                                )),
+                                  TextSpan(text: terms, style: TextStyle(
+                                    fontFamily: regular,
+                                    color: redColor,
+                                  )),
 
-                                TextSpan(text: " & ", style: TextStyle(
-                                  fontFamily: bold,
-                                  color: Colors.grey,
-                                )),
+                                  TextSpan(text: " & ", style: TextStyle(
+                                    fontFamily: regular,
+                                    color: Colors.grey,
+                                  )),
 
-                                TextSpan(text: privacypolicy, style: TextStyle(
-                                  fontFamily: bold,
-                                  color: redColor,
-                                ))
+                                  TextSpan(text: privacypolicy, style: TextStyle(
+                                    fontFamily: regular,
+                                    color: redColor,
+                                  ))
 
-                              ]
+                                ]
                             ),),
                           )
                         ],
                       ),
                       // this is the final submit btn
-                     const SizedBox(height: 10,),
+                      const SizedBox(height: 10,),
                       SizedBox(
                           width: MediaQuery.of(context).size.width*0.8,
                           //todo we need to change the onpress value ie where to redirect the url
-                          child: SubmitButton(context: context,color: redColor,textcolor: Colors.white, title: signup,onPress: (){
+                          child: SubmitButton(context: context,color: isChecked==true? redColor : lightGrey,textcolor: Colors.white, title: signup,onPress: (){
+                            // going to navigate to the home Screen of the app
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+
                           })
                       ),
 
                       // already a user/account
-                     const SizedBox(height: 10,),
+                      const SizedBox(height: 10,),
                       GestureDetector(
                         onTap: (){
                           // we need to navigate back to the login page
                           Navigator.pop(context);
                         },
                         child: RichText(text: const TextSpan(
-                          children: [
-                            TextSpan(text: alreadyHaveAccount,style: TextStyle(fontFamily: bold, color:Colors.grey )),
-                            TextSpan(text: login,style: TextStyle(fontFamily: bold, color: redColor)),
-                          ]
+                            children: [
+                              TextSpan(text: alreadyHaveAccount,style: TextStyle(fontFamily: bold, color:Colors.grey )),
+                              TextSpan(text: login,style: TextStyle(fontFamily: bold, color: redColor)),
+                            ]
                         )),
                       )
                     ],
