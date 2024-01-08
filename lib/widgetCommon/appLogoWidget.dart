@@ -7,10 +7,13 @@ Widget appLogoWidget(BuildContext context) {
   // Here we are going to create the widget that is used to represent the logo of the app, i.e., the shopping bag.
 
   // Here we will use the Velocity X
-  return Image.asset(icAppLogo)
-      .box
-      .white
-      .size(MediaQuery.of(context).size.width * 0.1, MediaQuery.of(context).size.height * 0.08)
-      .padding(const EdgeInsets.all(8))
-      .make();
+  return Container(
+    width: MediaQuery.of(context).size.width*0.25,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(15),
+    ),
+    padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+    child: Image.asset(icAppLogo),
+  );
 }

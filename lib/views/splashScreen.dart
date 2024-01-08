@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   // we are going to create a method to change the Screen ie navigation to the other Page
   changeScreen(){
     // so it will redirect to the LpginScreen after a delay of the 3 Seconds.
-    Future.delayed(const Duration(seconds: 3),(){
+    Future.delayed(const Duration(seconds: 2),(){
       Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
     });
   }
@@ -39,10 +39,9 @@ class _SplashScreenState extends State<SplashScreen> {
               // here we are going to use the background image of the red color and on that the icon is present
               Align(alignment: Alignment.topLeft,child: Image.asset(icSplashBg, width: MediaQuery.of(context).size.width*1,),),
 
-            const SizedBox(height: 20,),
             // it is the icon of the app
             appLogoWidget(context),
-            const SizedBox(height: 10,),
+             SizedBox(height: MediaQuery.of(context).size.height*0.015,),
             // here the appname is the name of the app which is the ekart.
             appname.text.fontFamily(bold).size(22).white.make(),
             const SizedBox(height: 5,),
@@ -50,9 +49,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
             // here the Spacer of VelocityX is just like the Expanded Widget in teh normal
             const Spacer(),
-            credits.text.white.fontFamily(semibold).make(),
-            const SizedBox(height: 30,),
-
+            credits.text.white.fontFamily(semibold).minFontSize(17).make(),
+            SizedBox(height: 5,),
           ],
         ),
       )

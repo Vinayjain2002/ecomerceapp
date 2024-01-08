@@ -13,7 +13,7 @@ Widget CustomTextField({
     children: <Widget>[
       Text(
         title!,
-        style: const TextStyle(color: redColor, fontFamily: semibold, fontSize: 16),
+        style: const TextStyle(color: redColor, fontFamily: semibold, fontSize: 16,fontWeight: FontWeight.w600),
       ),
       const SizedBox(height: 5),
 
@@ -24,13 +24,13 @@ Widget CustomTextField({
           hintText: hintText!,
           hintStyle: const TextStyle(
             fontFamily: bold,
-            color: textfieldGrey,
+            color: Colors.grey,
           ),
           isDense: true,
           fillColor: lightGrey,
           filled: true,
           border: InputBorder.none,
-          focusedBorder: const OutlineInputBorder(
+          focusedBorder:  OutlineInputBorder(
             borderSide: BorderSide(
               color: redColor,
             ),
