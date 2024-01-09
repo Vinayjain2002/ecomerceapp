@@ -13,3 +13,9 @@ const homeSecondSwiperList=[imgSs1,imgSs2,imgSs3,imgSs4];
 const featuredImg=[imgS1, imgS2, imgS3,imgS4,imgS5,imgS6];
 
 const featuredTitles=[womenDress, girlsDress, girlsWatch, boyGlasses, mobilePhone, tshirts];
+
+const categorieslist=[
+   menClothing, compAccesory, automobile, kidtoys, sports, cellphone,makeup,machines,furniture,
+];
+
+const categoryImage=[imgFc1,imgFc2,imgFc3,imgFc4,imgFc5,imgFc6,imgFc7,imgFc8,imgFc9];

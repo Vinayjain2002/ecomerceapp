@@ -37,5 +37,7 @@ const tshirts="TShirts";
 const girlsDress="Girls Dresses";
 const featuredProduct="Featured Product";
 
+//category Screen
+const menClothing="Men Clothing", compAccesory="Computer's Accessory", automobile="Automobile", kidtoys="Kid's Toys", sports="Sports", jwellery="Jwellery",cellphone="Cell Phone", furniture="Furniture", machines="Machines", makeup="Makeup";
 
 
