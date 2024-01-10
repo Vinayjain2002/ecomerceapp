@@ -1,6 +1,7 @@
 /// these are the details that are more commonly used ie the username in the textFields etc.
 
 const appname = "eMart";
+const email="email..";
 const appversion = "Version 1.0.0";
 const credits = "@ Vinay Jain";
 const emailHint="admin@123.com";

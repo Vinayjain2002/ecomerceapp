@@ -1,8 +1,15 @@
 import 'package:emart_app/views/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'consts/consts.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -13,7 +20,9 @@ class MyApp extends StatelessWidget {
   //todo we may need to use the routers for the navigation onto the Different Screen.
 
   Widget build(BuildContext context) {
+
     return MaterialApp(
+
       // going to remove the tag from the app
       debugShowCheckedModeBanner: false,
       title: appname,

@@ -6,6 +6,7 @@ import 'package:emart_app/widgetCommon/bgappSmall.dart';
 import 'package:emart_app/widgetCommon/customTextFIeld.dart';
 import 'package:flutter/material.dart';
 import '../widgetCommon/submitButton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 /// this the login Screen from where the user will have the different options to login into the app
 

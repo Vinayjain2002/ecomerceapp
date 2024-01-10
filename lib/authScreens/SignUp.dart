@@ -1,5 +1,7 @@
+import 'package:emart_app/controllers/authController.dart';
 import 'package:emart_app/views/Screens/Home.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../consts/colors.dart';
 import '../consts/strings.dart';
 import '../consts/styles.dart';
@@ -7,7 +9,7 @@ import '../widgetCommon/appLogoWidget.dart';
 import '../widgetCommon/bgappSmall.dart';
 import '../widgetCommon/customTextFIeld.dart';
 import '../widgetCommon/submitButton.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 ///this scree is for the purpos eof the signing up to the page
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -24,6 +26,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController nameController= TextEditingController();
   TextEditingController retypepasswordController= TextEditingController();
 
+  // we are getting our controller
+  var controller= Get.put(AuthController());
 
   Widget build(BuildContext context) {
     return  BgAppSmall(
