@@ -40,4 +40,7 @@ const featuredProduct="Featured Product";
 //category Screen
 const menClothing="Men Clothing", compAccesory="Computer's Accessory", automobile="Automobile", kidtoys="Kid's Toys", sports="Sports", jwellery="Jwellery",cellphone="Cell Phone", furniture="Furniture", machines="Machines", makeup="Makeup";
 
+const video="Video" , review="Reviews", sellerpolicy="Seller's Policy", returnpolicy="Return Policy", supportpolicy="Support POlicy",similarProduct="Products you may also like.";
+
+
 

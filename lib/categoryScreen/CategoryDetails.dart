@@ -1,3 +1,4 @@
+import 'package:emart_app/categoryScreen/ItemDetails.dart';
 import 'package:emart_app/consts/colors.dart';
 import 'package:emart_app/widgetCommon/bgappSmall.dart';
 import 'package:flutter/material.dart';
@@ -63,21 +64,29 @@ class _DetailedCategoryState extends State<DetailedCategory> {
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 10,childAspectRatio: 0.8,crossAxisSpacing: 20),
                         itemCount: 10,
                         itemBuilder:(context,index){
-                                return Container(
-                                  padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.06),
-                                  height: MediaQuery.of(context).size.height*0.4,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: Colors.white,
-                                  ),
-                                  child:  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Image.asset(imgP5, height: MediaQuery.of(context).size.height*0.16,fit: BoxFit.cover,),
-                                      const Text("Latest Leather Purses", style: TextStyle(fontFamily: bold, color: darkFontGrey),),
-                                      SizedBox(height: 5,),
-                                      const Text("\$600", style: TextStyle(fontFamily: bold, color: redColor, fontSize: 14),)
-                                    ],
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => ItemDetails(title: "Sports Products.")),
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.06),
+                                    height: MediaQuery.of(context).size.height*0.4,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: Colors.white,
+                                    ),
+                                    child:  Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Image.asset(imgP5, height: MediaQuery.of(context).size.height*0.16,fit: BoxFit.cover,),
+                                        const Text("Latest Leather Purses", style: TextStyle(fontFamily: bold, color: darkFontGrey),),
+                                        SizedBox(height: 5,),
+                                        const Text("\$600", style: TextStyle(fontFamily: bold, color: redColor, fontSize: 14),)
+                                      ],
+                                    ),
                                   ),
                                 );
                         }),

@@ -19,3 +19,6 @@ const categorieslist=[
 ];
 
 const categoryImage=[imgFc1,imgFc2,imgFc3,imgFc4,imgFc5,imgFc6,imgFc7,imgFc8,imgFc9];
+
+// this is going to be the list of the policy ofthe Detailed Items
+const itemDetailedButtonList=[video, review, privacypolicy, sellerpolicy, returnpolicy];
