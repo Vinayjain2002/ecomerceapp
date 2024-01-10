@@ -22,3 +22,10 @@ const categoryImage=[imgFc1,imgFc2,imgFc3,imgFc4,imgFc5,imgFc6,imgFc7,imgFc8,img
 
 // this is going to be the list of the policy ofthe Detailed Items
 const itemDetailedButtonList=[video, review, privacypolicy, sellerpolicy, returnpolicy];
+
+// profile button List
+const profileButtonList=[
+   orders, wishlist, messages
+];
+
+const profileButtonIcon=[icOrder, icOrder,icMessages];
