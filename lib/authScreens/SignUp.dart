@@ -1,3 +1,4 @@
+import 'package:emart_app/consts/consts.dart';
 import 'package:emart_app/controllers/authController.dart';
 import 'package:emart_app/views/Screens/Home.dart';
 import 'package:flutter/material.dart';
@@ -5,12 +6,15 @@ import 'package:get/get.dart';
 import '../consts/colors.dart';
 import '../consts/strings.dart';
 import '../consts/styles.dart';
+import '../firebaseConstants/firebaseConstants.dart';
 import '../widgetCommon/appLogoWidget.dart';
 import '../widgetCommon/bgappSmall.dart';
 import '../widgetCommon/customTextFIeld.dart';
 import '../widgetCommon/submitButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 ///this scree is for the purpos eof the signing up to the page
+//todo we could also add the founctionality of the Sending the email to the user to validate the user.
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -21,6 +25,10 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   bool isChecked=false;
+  String fieldcondmessage="";
+  bool passMatch=false;
+  bool strongpass=false;
+  bool validemail=false;
   TextEditingController emailController= TextEditingController();
   TextEditingController passwordController= TextEditingController();
   TextEditingController nameController= TextEditingController();
@@ -29,6 +37,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // we are getting our controller
   var controller= Get.put(AuthController());
 
+  bool emailcheck(){
+    // here we are going to check that the email of the user is of the correct format
+    String pattern = r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$';
+    RegExp regExp = RegExp(pattern);
+    if(!regExp.hasMatch(emailController.text)){
+      fieldcondmessage="Invalid Email";
+    }
+    return true;
+  }
+  bool passwordMatching(){
+    // here we are going to match the password entered are corrects
+      if(passwordController.text!=retypepasswordController.text){
+        // so our password matches correctly
+        fieldcondmessage="Passwords does not match";
+        return false;
+      }
+      return true;
+  }
+
+  bool strongPassword(){
+    // here we are going to check weather the password entered by the user are  strong
+    String pattern = r'^(?=.*[A-Z])(?=.*[@!#$%^&*(),.?":{}|<>])(?=.*\d).{8,}$';
+    RegExp regExp = RegExp(pattern);
+
+    // Use the regex to test the password
+     if(!regExp.hasMatch(passwordController.text)){
+       fieldcondmessage="Password is too wick";
+       return false;
+     }
+    return true;
+  }
   Widget build(BuildContext context) {
     return  BgAppSmall(
       context: context,
@@ -112,10 +151,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(
                           width: MediaQuery.of(context).size.width*0.8,
                           //todo we need to change the onpress value ie where to redirect the url
-                          child: SubmitButton(context: context,color: isChecked==true? redColor : lightGrey,textcolor: Colors.white, title: signup,onPress: (){
-                            // going to navigate to the home Screen of the app
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
-
+                          child: SubmitButton(context: context,color: isChecked==true? redColor : lightGrey,textcolor: Colors.white, title: signup,
+                              // here we need to define the condition that 
+                              onPress: () async{
+                            // going to define the logic to store the user credentials on the server
+                                strongpass=await strongPassword();
+                                validemail=await emailcheck();
+                                passMatch=await passwordMatching();
+                                if(isChecked!=false && passMatch==true &&  strongpass==true && validemail){
+                                  // ie the user had clicked on the essential permissions
+                                  try{
+                                    // we are going to save the data of the user
+                                    await controller.signUpMethod(context: context,emailAddress: emailController.text, password: passwordController.text).then((value) {
+                                      // we also need to store the image of the user
+                                      return (controller.storeUserData(name: nameController.text, email: emailController.value, password: passwordController.value));
+                                    }).then((value){
+                                      // we need to navigate to the home Screen after showing a toast
+                                      VxToast.show(context, msg: login);
+                                      return Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
+                                    });
+                                    // so we had created a new user and now we need to store the credential of the new user
+                                    
+                                  }
+                                  catch(e){
+                                    auth.signOut();
+                                    VxToast.show(context, msg: e.toString());
+                                    print("the error encountered is $e");
+                                  }
+                                }
+                                else{
+                                  // ie one or more fields are not correct
+                                  VxToast.show(context, msg: fieldcondmessage);
+                                }
                           })
                       ),
 

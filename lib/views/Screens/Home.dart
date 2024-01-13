@@ -1,4 +1,3 @@
-import 'package:emart_app/CartScreen/CartScreen.dart';
 import 'package:emart_app/HomeScreen/HomeScreen.dart';
 import 'package:emart_app/accountAuthScreen/AccountScreen.dart';
 import 'package:emart_app/categoryScreen/CategoryScreen.dart';
@@ -8,6 +7,7 @@ import 'package:emart_app/controllers/homeController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../CartScreen/cartScreen.dart';
 import '../../consts/images.dart';
 import '../../consts/strings.dart';
 
@@ -38,7 +38,7 @@ class _HomeScreenState extends State<Home> {
     var navBody=[
         HomeScreen(),
         CategoryScreen(),
-        CartScreen(),
+         CartScreen(),
         AccountScreen(),
     ];
     return Scaffold(

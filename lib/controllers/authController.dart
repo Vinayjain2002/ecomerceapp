@@ -35,7 +35,7 @@ class AuthController extends GetxController{
 
 
   // creating a account of the user based on the email adn the password
-  Future<UserCredential?>EmailUserRegisteration({required BuildContext context,emailAddress, password}) async{
+  Future<UserCredential?>signUpMethod({required BuildContext context,emailAddress, password}) async{
   try {
   final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: emailAddress,
@@ -54,16 +54,6 @@ class AuthController extends GetxController{
     }
   }
 
-  // method to Sign out by the User.
-  signoutMethod({required BuildContext context}) async{
-    //this method is used for the purpose of Signing out the User from the ap
-    try{
-      await FirebaseAuth.instance.signOut();
-    }
-    catch(e){
-      VxToast.show(context, msg: e.toString());
-    }
-  }
   // sending the email Link to the User for the verification
   Future<UserCredential?>LoginViaEmail() async{
     try{

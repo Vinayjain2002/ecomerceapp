@@ -49,4 +49,5 @@ const wishlist="My Wishlist";
 const orders="My Orders";
 const messages="Messages";
 
-
+const loginsucces="Login Succesfully";
+const logoutsucess="Log Out Succesfully";
