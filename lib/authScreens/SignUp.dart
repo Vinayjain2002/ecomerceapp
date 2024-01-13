@@ -24,6 +24,12 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
+
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+
+    super.setState(fn);
+  }
   bool isChecked=false;
   String fieldcondmessage="";
   bool passMatch=false;
@@ -73,138 +79,138 @@ class _SignUpScreenState extends State<SignUpScreen> {
       context: context,
       //it is the widget that we are going to pass to the Screen.
       childWidget: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Center(
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: MediaQuery.of(context).size.height*0.1,),
-              appLogoWidget(context),
-
-              const SizedBox(height: 10,),
-              const Text("Join the  $appname", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white, fontSize: 22, fontFamily: bold),)
-              ,
-
-              const SizedBox(height: 10,),
-              Container(
-                width: MediaQuery.of(context).size.width*0.8,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(spreadRadius: 1, color: Colors.grey,blurRadius: 5)
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.05, vertical: MediaQuery.of(context).size.height*0.03),
-                  child: Column(
-                    children: <Widget>[
-                      CustomTextField(context: context,title: "Name",hintText: namehint, controller: nameController),
-                      CustomTextField(context: context,title: "Email", hintText: emailHint,controller: emailController),
-                      CustomTextField(context: context,title: "Password", hintText: passwordHint,controller: passwordController),
-                      CustomTextField(context: context,title: retypepassword, hintText: passwordHint,controller: retypepasswordController),
-
-                      // this is the decleartion button
-                      Row(
-                        children: <Widget>[
-                          Checkbox(
-                            value: false,
-                            onChanged: (newvalue){
-                              setState(() {
-                                isChecked=true;
-                              });
-                            },
-                            checkColor: redColor,
-                          ) ,
-
-                          const SizedBox(width: 5,),
-                          Expanded(
-                            child: RichText(text: const TextSpan(
-                                children: [
-                                  TextSpan(text: "I agree to the ", style: TextStyle(
-                                    fontFamily: regular,
-                                    color: Colors.grey,
-
-                                  )),
-
-                                  TextSpan(text: terms, style: TextStyle(
-                                    fontFamily: regular,
-                                    color: redColor,
-                                  )),
-
-                                  TextSpan(text: " & ", style: TextStyle(
-                                    fontFamily: regular,
-                                    color: Colors.grey,
-                                  )),
-
-                                  TextSpan(text: privacypolicy, style: TextStyle(
-                                    fontFamily: regular,
-                                    color: redColor,
-                                  ))
-
-                                ]
-                            ),),
-                          )
-                        ],
-                      ),
-                      // this is the final submit btn
-                      const SizedBox(height: 10,),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width*0.8,
-                          //todo we need to change the onpress value ie where to redirect the url
-                          child: SubmitButton(context: context,color: isChecked==true? redColor : lightGrey,textcolor: Colors.white, title: signup,
-                              // here we need to define the condition that 
-                              onPress: () async{
-                            // going to define the logic to store the user credentials on the server
-                                strongpass=await strongPassword();
-                                validemail=await emailcheck();
-                                passMatch=await passwordMatching();
-                                if(isChecked!=false && passMatch==true &&  strongpass==true && validemail){
-                                  // ie the user had clicked on the essential permissions
-                                  try{
-                                    // we are going to save the data of the user
-                                    await controller.signUpMethod(context: context,emailAddress: emailController.text, password: passwordController.text).then((value) {
-                                      // we also need to store the image of the user
-                                      return (controller.storeUserData(name: nameController.text, email: emailController.value, password: passwordController.value));
-                                    }).then((value){
-                                      // we need to navigate to the home Screen after showing a toast
-                                      VxToast.show(context, msg: login);
-                                      return Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
-                                    });
-                                    // so we had created a new user and now we need to store the credential of the new user
-                                    
-                                  }
-                                  catch(e){
-                                    auth.signOut();
-                                    VxToast.show(context, msg: e.toString());
-                                    print("the error encountered is $e");
-                                  }
-                                }
-                                else{
-                                  // ie one or more fields are not correct
-                                  VxToast.show(context, msg: fieldcondmessage);
-                                }
-                          })
-                      ),
-
-                      // already a user/account
-                      const SizedBox(height: 10,),
-                      GestureDetector(
-                        onTap: (){
-                          // we need to navigate back to the login page
-                          Navigator.pop(context);
-                        },
-                        child: RichText(text: const TextSpan(
-                            children: [
-                              TextSpan(text: alreadyHaveAccount,style: TextStyle(fontFamily: bold, color:Colors.grey )),
-                              TextSpan(text: login,style: TextStyle(fontFamily: bold, color: redColor)),
-                            ]
-                        )),
-                      )
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: MediaQuery.of(context).size.height*0.1,),
+                appLogoWidget(context),
+          
+                const SizedBox(height: 10,),
+                const Text("Join the  $appname", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white, fontSize: 22, fontFamily: bold),)
+                ,
+          
+                const SizedBox(height: 10,),
+                Container(
+                  width: MediaQuery.of(context).size.width*0.8,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: const [
+                      BoxShadow(spreadRadius: 1, color: Colors.grey,blurRadius: 5)
                     ],
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                ),
-              )
-            ],
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.05, vertical: MediaQuery.of(context).size.height*0.03),
+                    child: Column(
+                      children: <Widget>[
+                        CustomTextField(context: context,title: "Name",hintText: namehint, controller: nameController),
+                        CustomTextField(context: context,title: "Email", hintText: emailHint,controller: emailController),
+                        CustomTextField(context: context,title: "Password", hintText: passwordHint,controller: passwordController),
+                        CustomTextField(context: context,title: retypepassword, hintText: passwordHint,controller: retypepasswordController),
+          
+                        // this is the decleartion button
+                        Row(
+                          children: <Widget>[
+                            Checkbox(
+                              value: isChecked,
+                              onChanged: (newvalue){
+                                setState(() {
+                                  isChecked=newvalue ?? false;
+                                });
+                              },
+                              checkColor: redColor,
+                              activeColor: Colors.grey,
+                            ) ,
+          
+                            const SizedBox(width: 5,),
+                            Expanded(
+                              child: RichText(text: const TextSpan(
+                                  children: [
+                                    TextSpan(text: "I agree to the ", style: TextStyle(
+                                      fontFamily: regular,
+                                      color: Colors.grey,
+          
+                                    )),
+          
+                                    TextSpan(text: terms, style: TextStyle(
+                                      fontFamily: regular,
+                                      color: redColor,
+                                    )),
+          
+                                    TextSpan(text: " & ", style: TextStyle(
+                                      fontFamily: regular,
+                                      color: Colors.grey,
+                                    )),
+          
+                                    TextSpan(text: privacypolicy, style: TextStyle(
+                                      fontFamily: regular,
+                                      color: redColor,
+                                    ))
+          
+                                  ]
+                              ),),
+                            )
+                          ],
+                        ),
+                        // this is the final submit btn
+                        const SizedBox(height: 10,),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width*0.8,
+                            //todo we need to change the onpress value ie where to redirect the url
+                            child: SubmitButton(context: context,color: isChecked==true? redColor : lightGrey,textcolor: Colors.white, title: signup,
+                                // here we need to define the condition that 
+                                onPress: () async{
+                                  strongpass=await strongPassword();
+                                  validemail=await emailcheck();
+                                  passMatch=await passwordMatching();
+                                  if(isChecked!=false && passMatch==true &&  strongpass==true && validemail){
+                                    // ie the user had clicked on the essential permissions
+                                    try{
+                                      final signupresult=await controller.signUpMethod(context: context,emailAddress: emailController.text, password: passwordController.text);
+          
+                                      if(signupresult!=null){
+                                        // user is not already present
+                                        await controller.storeUserData(name: nameController.text, email: emailController.value, password: passwordController).then((value){
+                                          // we are navigating it to the home Screen
+                                          VxToast.show(context, msg: login);
+                                            return Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
+                                        });
+                                      }
+          
+                                    }
+                                    catch(e){
+                                      auth.signOut();
+                                      VxToast.show(context, msg: e.toString());
+                                      print("the error encountered is $e");
+                                    }
+                                  }
+                                  else{
+                                    // ie one or more fields are not correct
+                                    VxToast.show(context, msg: fieldcondmessage);
+                                  }
+                            })
+                        ),
+          
+                        // already a user/account
+                        const SizedBox(height: 10,),
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                          child: RichText(text: const TextSpan(
+                              children: [
+                                TextSpan(text: alreadyHaveAccount,style: TextStyle(fontFamily: bold, color:Colors.grey )),
+                                TextSpan(text: login,style: TextStyle(fontFamily: bold, color: redColor, fontSize: 18)),
+                              ]
+                          )),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

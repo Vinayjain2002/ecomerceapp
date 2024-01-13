@@ -35,25 +35,52 @@ class AuthController extends GetxController{
 
 
   // creating a account of the user based on the email adn the password
-  Future<UserCredential?>signUpMethod({required BuildContext context,emailAddress, password}) async{
-  try {
-  final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: emailAddress,
-      password: password,
-    );
-  } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        VxToast.show(context, msg: e.toString());
-      print('The password provided is too weak.');
-  } else if (e.code == 'email-already-in-use') {
-        VxToast.show(context, msg: e.toString());
-      print('The account already exists for that email.');
-    }
-  } catch (e) {
+  // Future<UserCredential?>signUpMethod({required BuildContext context,emailAddress, password}) async{
+  // try {
+  // final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+  //     email: emailAddress,
+  //     password: password,
+  //   );
+  // } on FirebaseAuthException catch (e) {
+  //     if (e.code == 'weak-password') {
+  //       VxToast.show(context, msg: e.toString());
+  //     print('The password provided is too weak.');
+  // } else if (e.code == 'email-already-in-use') {
+  //       VxToast.show(context, msg: e.toString());
+  //     print('The account already exists for that email.');
+  //   }
+  // } catch (e) {
+  //     print(e);
+  //   }
+  // }
+  Future<UserCredential?> signUpMethod(
+      {required BuildContext context, String? emailAddress, String? password}) async {
+    try {
+      // Check if the email is already in use
+      final existingUser = await FirebaseAuth.instance.fetchSignInMethodsForEmail(emailAddress!);
+      if (existingUser.isNotEmpty) {
+        // User is already signed up, show an error message and return null
+        VxToast.show(context, msg: 'The account already exists for that email.');
+        return null;
+      }
+
+      // If the email is not in use, proceed with creating a new account
+      final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailAddress,
+        password: password!,
+      );
+
+      return userCredential;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        VxToast.show(context, msg: 'The account already exists for that email.');
+        print('The account already exists for that email.');
+        return null;
+      }
+    } catch (e) {
       print(e);
     }
   }
-
   // sending the email Link to the User for the verification
   Future<UserCredential?>LoginViaEmail() async{
     try{
