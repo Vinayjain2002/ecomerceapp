@@ -1,0 +1,31 @@
+import 'package:emart_app/consts/colors.dart';
+import 'package:flutter/material.dart';
+
+import '../consts/styles.dart';
+
+Widget BookItemButton({
+  required BuildContext context,
+  required String? title,
+  required VoidCallback? onPress,
+}) {
+  return TextButton(
+    style: TextButton.styleFrom(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.zero,
+      ),
+      backgroundColor: Colors.red,
+    ),
+    onPressed: onPress,
+    child: Text(
+      title!,
+      style: TextStyle(
+        color: Colors.white,
+        fontFamily: bold,
+        fontSize: 19,
+        letterSpacing: 1,
+        wordSpacing: 2
+      ),
+    ),
+  );
+}
+
