@@ -42,91 +42,101 @@ class LoginScreen extends StatelessWidget {
               ,
 
               SizedBox(height: MediaQuery.of(context).size.height*0.025),
-              Container(
-                width: MediaQuery.of(context).size.width*0.8,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(spreadRadius: 1, color: Colors.grey,blurRadius: 5,)
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.05, vertical: MediaQuery.of(context).size.height*0.03),
-                  child: Column(
-                    children: <Widget>[
-                      CustomTextField(context: context,title: "Email",hintText: emailHint, controller: emailController),
-                      CustomTextField(context: context,title: "Password", hintText: passwordHint,controller: passwordController),
+              // it will be used for the purpose of showing a icon while the user is getting loginned
 
-                      // now we are going to create a button for the forgetPasswords
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: GestureDetector(
-                          onTap: (){
-                            //todo we need to define the navigator to be push when the user click on the forget password
-                          },
-                          child: Text(forgetpass,style: TextStyle(color: Vx.gray500),),
-                        )
-                      ),
-                      SizedBox(height: 8,),
-                      // submit btn is going to be created
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width*0.8,
-                          //todo we need to change the onpress value ie where to redirect the url
-
-                          child: SubmitButton(context: context,color: redColor,textcolor: Colors.white, title: login,onPress: () async {
-                            // so here we need to match the user credentials with the already present data in the firestone.
-                            try{
-                              final tryLogging = await controller.loginMethod(context: context,emailAddress: emailController.text, password: passwordController.text);
-
-                              if(tryLogging!=null){
-                                // means no error while logging
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
-                              }
-                              else{
-                                print("Some error encountered while Logging");
-                              }
-                            }
-                            catch(e){
-                              print("eror while logining the user is");
-                            }
-                          })
-                      ),
-
-                      const SizedBox(height: 3,),
-                      // now we need to define the create new account
-                      const Text(createnewaccount, style: TextStyle(color: fontGrey),),
-
-                      // sign up options
-                      const SizedBox(height: 5,),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width*0.8,
-                          //todo we need to change the onpress value ie where to redirect the url
-
-                          child: SubmitButton(context: context,color: lightgolden,textcolor: redColor, title: signup,onPress: (){
-                            // we need to navigate to the signuppage
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> SignUpScreen()));
-                          })
-                      ),
-
-                      // now we are going to give the user different options to login with ie with teh help of the google and the other things
-                      const SizedBox(height: 10,),
-                     const Text(loginwith, style: TextStyle(color: fontGrey),),
-                      const SizedBox(height: 5,),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(socialIconList.length, (index) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CircleAvatar(
-                            radius: 28,
-                            backgroundColor: lightGrey,
-                            // here we will place our icons
-                            child: Image.asset(socialIconList[index],width: 45,),
-                          ),
-                        ))
-                      )
+              Obx(
+                    ()=>Container(
+                    width: MediaQuery.of(context).size.width*0.8,
+                    decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: const [
+                      BoxShadow(spreadRadius: 1, color: Colors.grey,blurRadius: 5,)
                     ],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                    child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.05, vertical: MediaQuery.of(context).size.height*0.03),
+                    child: Column(
+                      children: <Widget>[
+                        CustomTextField(context: context,title: "Email",hintText: emailHint, controller: emailController),
+                        CustomTextField(context: context,title: "Password", hintText: passwordHint,controller: passwordController),
+
+                        // now we are going to create a button for the forgetPasswords
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: GestureDetector(
+                            onTap: (){
+                              //todo we need to define the navigator to be push when the user click on the forget password
+                            },
+                            child: Text(forgetpass,style: TextStyle(color: Vx.gray500),),
+                          )
+                        ),
+                        SizedBox(height: 8,),
+                        // submit btn is going to be created
+                        controller.isLoading.value ? const CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(redColor),
+                        ):
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width*0.8,
+                            //todo we need to change the onpress value ie where to redirect the url
+
+                            child: SubmitButton(context: context,color: redColor,textcolor: Colors.white, title: login,onPress: () async {
+                              controller.isLoading(true);
+                              // so here we need to match the user credentials with the already present data in the firestone.
+                              try{
+                                final tryLogging = await controller.loginMethod(context: context,emailAddress: emailController.text, password: passwordController.text);
+
+                                if(tryLogging!=null){
+                                  // means no error while logging
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+                                }
+                                else{
+                                  controller.isLoading(false);
+                                  print("Some error encountered while Logging");
+                                }
+                              }
+                              catch(e){
+                                controller.isLoading(false);
+                                print("eror while logining the user is");
+                              }
+                            })
+                        ),
+
+                        const SizedBox(height: 3,),
+                        // now we need to define the create new account
+                        const Text(createnewaccount, style: TextStyle(color: fontGrey),),
+
+                        // sign up options
+                        const SizedBox(height: 5,),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width*0.8,
+                            //todo we need to change the onpress value ie where to redirect the url
+
+                            child: SubmitButton(context: context,color: lightgolden,textcolor: redColor, title: signup,onPress: (){
+                              // we need to navigate to the signuppage
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> SignUpScreen()));
+                            })
+                        ),
+
+                        // now we are going to give the user different options to login with ie with teh help of the google and the other things
+                        const SizedBox(height: 10,),
+                       const Text(loginwith, style: TextStyle(color: fontGrey),),
+                        const SizedBox(height: 5,),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(socialIconList.length, (index) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CircleAvatar(
+                              radius: 28,
+                              backgroundColor: lightGrey,
+                              // here we will place our icons
+                              child: Image.asset(socialIconList[index],width: 45,),
+                            ),
+                          ))
+                        )
+                      ],
+                    ),
                   ),
                 ),
               )

@@ -8,7 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../consts/consts.dart';
 
 class AuthController extends GetxController{
-  // here it is a authentication controller
+  var isLoading= false.obs;
+
   //login Method with the help of the email and the password. and the firebase authentication.
   Future<UserCredential?> loginMethod({required BuildContext context,required emailAddress, required password}) async{
     UserCredential? userCredential;

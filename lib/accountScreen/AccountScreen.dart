@@ -1,3 +1,4 @@
+import 'package:emart_app/accountScreen/editProfile.dart';
 import 'package:emart_app/consts/LIst.dart';
 import 'package:emart_app/consts/consts.dart';
 import 'package:emart_app/userData/userInfo.dart';
@@ -17,6 +18,20 @@ class AccountScreen extends StatelessWidget {
         context: context,
         // here we aere going to show the central part of the app
         childWidget: Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 30,
+            iconTheme: IconThemeData(color: Colors.white),
+            actions: [
+              IconButton(
+                onPressed: (){
+
+                },
+                  icon: Icon(Icons.edit,color: Colors.white),
+                padding: EdgeInsets.only(right: 20),
+              ),
+
+            ],
+          ),
           body: SafeArea(
             child: Container(
               padding:   EdgeInsets.only(top: MediaQuery.of(context).size.height*0.02,left: 10,right: 10),
@@ -24,15 +39,6 @@ class AccountScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // here we are going to give a option of the EditProfile to the user
-                  GestureDetector(
-                    onTap: (){
-                      // here we need to define the function to edit the profiles.
-                    },
-                    child: const Align(
-                      alignment: Alignment.centerRight,
-                        child: Icon(Icons.edit,color: Colors.white,)
-                    ),
-                  ),
                   const SizedBox(height: 15,),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,35 +103,38 @@ class AccountScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 40,),
                   // we are going to build the button Sections also
-                  SizedBox(
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.grey,
-                      color: Colors.white,
-                      child: ListView.separated(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        separatorBuilder: (context,index){
-                          // this is the seperator that is used to seperate teh items
-                          return const Divider(
-                             color: textfieldGrey,
-                          );
-                        },
-                        itemCount: profileButtonList.length,
-                          itemBuilder: (BuildContext constext,int index){
-                          return GestureDetector(
-                            onTap: (){
-                              // we nee dto redirect to the My Orders Page which contains the info of the Previous orders
-
-                            },
-                            child: ListTile(
-                              leading: Image.asset(profileButtonIcon[index], width: 25,),
-                              title: Text(profileButtonList[index],style: const TextStyle(fontFamily: semibold, color: darkFontGrey,fontSize: 16),),
-
-                            ),
-                          );
-                      }),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow:[
+                          BoxShadow(color: Colors.grey.withOpacity(0.5),spreadRadius: 5,blurRadius: 5)
+                        ],
+                        borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width*0.06),
                     ),
+                    padding: EdgeInsets.all(20),
+                    child: ListView.separated(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      separatorBuilder: (context,index){
+                        // this is the seperator that is used to seperate teh items
+                        return const Divider(
+                           color: textfieldGrey,
+                        );
+                      },
+                      itemCount: profileButtonList.length,
+                        itemBuilder: (BuildContext constext,int index){
+                        return GestureDetector(
+                          onTap: (){
+                            // we nee dto redirect to the My Orders Page which contains the info of the Previous orders
+
+                          },
+                          child: ListTile(
+                            leading: Image.asset(profileButtonIcon[index], width: 25,),
+                            title: Text(profileButtonList[index],style: const TextStyle(fontFamily: semibold, color: darkFontGrey,fontSize: 16),),
+
+                          ),
+                        );
+                    }),
                   )
                 ],
               ),
