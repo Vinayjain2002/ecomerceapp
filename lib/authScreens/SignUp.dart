@@ -4,6 +4,7 @@ import 'package:emart_app/controllers/autologin.dart';
 import 'package:emart_app/views/Screens/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controllers/textFieldVerifier.dart';
 import '../firebaseConstants/firebaseConstants.dart';
 import '../widgetCommon/appLogoWidget.dart';
 import '../widgetCommon/bgappSmall.dart';
@@ -45,47 +46,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
   var controller= Get.put(AuthController());
   // we are importing the controller for the purpose of the autologin of the user
   var autologin= Get.put(AutoLogin());
-  bool validPhone(){
-    RegExp phoneRegex = RegExp(r"^\d{10}$");
 
-    if(!phoneRegex.hasMatch(phonenoController.text)){
-      fieldcondmessage="invalid phone no";
-      return false;
+  void textFieldsChecking(){
+    strongpass= strongPassword(password: passwordController.text);
+    validphoneno=validPhone(phoneno: phonenoController.text);
+    validemail= emailcheck(email: emailController.text);
+    passMatch=passwordMatching(password: passwordController.text, retypepassword: retypepasswordController.text);
+
+    if(validemail==false){
+      fieldcondmessage="Email is not valid";
+    }else if(strongpass==false){
+      fieldcondmessage="Password is not Strong";
+    }else if(passMatch==false){
+      fieldcondmessage="Passwords does not match";
+    }else if(validphoneno==false){
+      fieldcondmessage="Phone no is not valid.";
     }
-    return true;
   }
 
-  bool emailcheck(){
-    // here we are going to check that the email of the user is of the correct format
-    String pattern = r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$';
-    RegExp regExp = RegExp(pattern);
-    if(!regExp.hasMatch(emailController.text)){
-      fieldcondmessage="Invalid Email";
-    }
-    return true;
-  }
-  bool passwordMatching(){
-    // here we are going to match the password entered are corrects
-      if(passwordController.text!=retypepasswordController.text){
-        // so our password matches correctly
-        fieldcondmessage="Passwords does not match";
-        return false;
-      }
-      return true;
-  }
 
-  bool strongPassword(){
-    // here we are going to check weather the password entered by the user are  strong
-    String pattern = r'^(?=.*[A-Z])(?=.*[@!#$%^&*(),.?":{}|<>])(?=.*\d).{8,}$';
-    RegExp regExp = RegExp(pattern);
-
-    // Use the regex to test the password
-     if(!regExp.hasMatch(passwordController.text)){
-       fieldcondmessage="Password is too wick";
-       return false;
-     }
-    return true;
-  }
   Widget build(BuildContext context) {
     return  BgAppSmall(
       context: context,
@@ -177,10 +156,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               child: SubmitButton(context: context,color: isChecked==true? redColor : lightGrey,textcolor: Colors.white, title: signup,
                                   // here we need to define the condition that
                                   onPress: () async{
-                                    strongpass= strongPassword();
-                                    validphoneno=validPhone();
-                                    validemail= emailcheck();
-                                    passMatch=passwordMatching();
+                                    // for cheking the correctness of the textFields.
+                                    textFieldsChecking();
                                     if(isChecked!=false && passMatch==true &&  strongpass==true && validemail&& validphoneno){
                                       // ie the user had clicked on the essential permissions
                                       controller.isLoading(true);

@@ -24,7 +24,7 @@ class AccountScreen extends StatelessWidget {
             actions: [
               IconButton(
                 onPressed: (){
-
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfile()));
                 },
                   icon: Icon(Icons.edit,color: Colors.white),
                 padding: EdgeInsets.only(right: 20),
@@ -51,7 +51,7 @@ class AccountScreen extends StatelessWidget {
                       const SizedBox(width: 5,),
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                         children: <Widget>[
+                          children: <Widget>[
                            Text(UserName, style: const TextStyle(fontFamily: bold, color: Colors.white,fontSize: 17),),
 
                            Text(UserEmail, style: const TextStyle(color: Colors.white, fontSize: 14),)
@@ -96,9 +96,9 @@ class AccountScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      accountDetails(context: context,width: MediaQuery.of(context).size.width/3.25, count: "00", title: "In your cart"),
-                      accountDetails(context: context,width: MediaQuery.of(context).size.width/3.25, count: "32", title: "In your whilist"),
-                      accountDetails(context: context,width: MediaQuery.of(context).size.width/3.25, count: "65", title: "In your Orders")
+                      accountDetails(context: context,width: MediaQuery.of(context).size.width/3.25, count: cart_count.toString(), title: "In your cart"),
+                      accountDetails(context: context,width: MediaQuery.of(context).size.width/3.25, count: whilist_count.toString(), title: " your whilist"),
+                      accountDetails(context: context,width: MediaQuery.of(context).size.width/3.25, count: order_count.toString(), title: "In your Orders")
                     ],
                   ),
                   const SizedBox(height: 40,),

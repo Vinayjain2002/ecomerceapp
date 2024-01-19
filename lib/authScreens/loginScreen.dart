@@ -1,12 +1,14 @@
 import 'package:emart_app/authScreens/SignUp.dart';
 import 'package:emart_app/consts/LIst.dart';
 import 'package:emart_app/consts/consts.dart';
+import 'package:emart_app/userData/userInfo.dart';
 import 'package:emart_app/widgetCommon/appLogoWidget.dart';
 import 'package:emart_app/widgetCommon/bgappSmall.dart';
 import 'package:emart_app/widgetCommon/customTextFIeld.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import '../controllers/autologin.dart';
 import '../views/Screens/Home.dart';
 import '../widgetCommon/submitButton.dart';
 import 'package:emart_app/controllers/authController.dart';
@@ -21,7 +23,7 @@ class LoginScreen extends StatelessWidget {
 
   // definning the controller for the purpose of the authenticating the user
   var controller= Get.put(AuthController());
-
+  var autologin= Get.put(AutoLogin());
   @override
   Widget build(BuildContext context) {
     return BgAppSmall(
@@ -60,7 +62,6 @@ class LoginScreen extends StatelessWidget {
                       children: <Widget>[
                         CustomTextField(context: context,title: "Email",hintText: emailHint, controller: emailController),
                         CustomTextField(context: context,title: "Password", hintText: passwordHint,controller: passwordController),
-
                         // now we are going to create a button for the forgetPasswords
                         Align(
                           alignment: Alignment.centerRight,
@@ -85,10 +86,12 @@ class LoginScreen extends StatelessWidget {
                               // so here we need to match the user credentials with the already present data in the firestone.
                               try{
                                 final tryLogging = await controller.loginMethod(context: context,emailAddress: emailController.text, password: passwordController.text);
-
                                 if(tryLogging!=null){
-                                  // means no error while logging
+                                  //todo we need to retrieve teh data of the user from the fireStone of the uid tryLogging
+                                  var userData=await controller.getUserData(context: context, uid: tryLogging);
+                                  await autologin.storedata(email: emailController.text, password: passwordController.text, phoneno: UserMobileNo, username: UserName);
                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+                                  controller.isLoading(false);
                                 }
                                 else{
                                   controller.isLoading(false);

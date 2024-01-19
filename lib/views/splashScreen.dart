@@ -48,16 +48,19 @@ void loginUser() async {
     if(isLoggedIn){
       // we need to redirect the user directly to the homScreen without any wait
       String? email=prefs.getString("email");
+      print(email);
       String? password=prefs.getString("password");
+      print(password);
       String? username= prefs.getString("username");
       String? phoneno= prefs.getString("phoneno");
       //creating a instance to authenticate the user email and the password
-      final tryloggin= await controller.loginMethod(context: context, emailAddress: email, password: password);
+      final trylogging= await controller.loginMethod(context: context, emailAddress: email, password: password);
       // storing the data of the user in a file named as the userinfo for the future use of the data.
-      UserName=username!;
-      UserEmail=email!;
-      UserMobileNo=phoneno!;
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>const Home()));
+      if(trylogging != null){
+        // here we will fetch the data for the Uid from the firestone
+        final userData=await controller.getUserData(context: context, uid: trylogging);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>const Home()));
+      }
     }
     else{
       // we are waiting for 2 sec for the screen to be created
