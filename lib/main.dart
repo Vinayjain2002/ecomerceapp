@@ -21,14 +21,12 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   //todo we may need to use the routers for the navigation onto the Different Screen.
 
   Widget build(BuildContext context) {
 
     return MaterialApp(
-
       // going to remove the tag from the app
       debugShowCheckedModeBanner: false,
       title: appname,
@@ -36,6 +34,12 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.transparent,
         appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
           fontFamily: regular,
+        tooltipTheme: TooltipThemeData(
+          textStyle: TextStyle(
+            color: Colors.grey,
+            fontSize: 16.0,
+          ),
+        ),
       ),
       // we are going to show the splash Screen ie when the app starts
       home: SplashScreen(),

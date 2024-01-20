@@ -12,7 +12,7 @@ class HelpCenterScreen extends StatelessWidget {
         childWidget: Scaffold(
           appBar: AppBar(
             toolbarHeight: 60,
-            iconTheme: IconThemeData(color: Colors.white,size: 28,weight: 600),
+            iconTheme: IconThemeData(color: Colors.white,weight: 800),
             title: Text("24X7 Customer Support", style: TextStyle(color: Colors.white, fontFamily: semibold, fontSize: 20),),
             actions: <Widget>[
               IconButton(onPressed: (){}, icon: Icon(Icons.person)),

@@ -18,7 +18,7 @@ class CuponsScreen extends StatelessWidget {
         childWidget: Scaffold(
          appBar: AppBar(
            toolbarHeight: MediaQuery.of(context).size.height*0.08,
-           iconTheme: IconThemeData(color: whiteColor),
+           iconTheme: IconThemeData(color: whiteColor,weight: 800),
            title: Text("Cupons", style: TextStyle(color: whiteColor,fontSize: 23, fontFamily: semibold),),
            actions: [
              IconButton(
