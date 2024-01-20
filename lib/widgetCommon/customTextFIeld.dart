@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 //todo we need to define a eye that will allow to see the password entered by the user
 Widget CustomTextField({
   required BuildContext context,
-  String? title,
-  String? hintText,
-  TextEditingController? controller,
+  required String? title,
+  required String? hintText,
+  required TextEditingController? controller,
 }) {
  bool protectedText=false;
  bool eye=false;

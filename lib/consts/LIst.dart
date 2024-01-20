@@ -1,4 +1,11 @@
+import 'package:emart_app/accountScreen/CuponsScreen.dart';
+import 'package:emart_app/accountScreen/EditProfileScreen.dart';
+import 'package:emart_app/accountScreen/HelpCenterScreen.dart';
+import 'package:emart_app/accountScreen/WhilistScreen.dart';
 import 'package:emart_app/consts/consts.dart';
+import 'package:flutter/material.dart';
+
+import '../accountScreen/OrdersScreen.dart';
 
 /// here in this fil we aregoing to store the valrious icons that are going to be used
 
@@ -29,3 +36,15 @@ const profileButtonList=[
 ];
 
 const profileButtonIcon=[icOrder, icOrder,icMessages];
+const accountOptionsList=["Orders", "Whilist","Cupons","Help Center","Edit Profile"];
+const accountOptionsIcons = [
+   Icons.sort, // Correct way to assign icons to list elements
+   Icons.favorite,
+   Icons.card_giftcard,
+   Icons.live_help,
+   Icons.edit
+];
+
+final accountOptionsActions=[OrdersScreen(),WhilistScreen(),CuponsScreen(),HelpCenterScreen(),EditProfileScreen()];
+// oreder history List
+var OrderHistoryImage=[imgB1,imgB10,imgFc5,imgFc4,imgFc1];

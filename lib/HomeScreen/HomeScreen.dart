@@ -112,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                                 //todo we need to add the property to the card to make more attractive
                                 elevation: 3,
                                 margin:
-                                    const EdgeInsets.symmetric(horizontal: 15),
+                                const EdgeInsets.symmetric(horizontal: 15),
                                 shadowColor: Colors.grey,
                                 child: Image.asset(
                                   homeSecondSwiperList[index],

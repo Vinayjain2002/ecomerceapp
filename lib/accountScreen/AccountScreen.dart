@@ -1,9 +1,10 @@
-import 'package:emart_app/accountScreen/editProfile.dart';
+import 'package:emart_app/accountScreen/EditProfileScreen.dart';
 import 'package:emart_app/consts/LIst.dart';
 import 'package:emart_app/consts/consts.dart';
 import 'package:emart_app/userData/userInfo.dart';
 import 'package:emart_app/views/splashScreen.dart';
 import 'package:emart_app/widgetCommon/bgappSmall.dart';
+import 'package:emart_app/widgetCommon/submitButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/autologin.dart';
@@ -16,125 +17,98 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BgAppSmall(
         context: context,
-        // here we aere going to show the central part of the app
+        // here we are going to show the central part of the app
         childWidget: Scaffold(
           appBar: AppBar(
-            toolbarHeight: 30,
-            iconTheme: IconThemeData(color: Colors.white),
-            actions: [
-              IconButton(
-                onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfile()));
-                },
-                  icon: Icon(Icons.edit,color: Colors.white),
-                padding: EdgeInsets.only(right: 20),
-              ),
-
-            ],
+            iconTheme: IconThemeData(
+              color: Colors.white,
+              weight: 800
+            ),
+            toolbarHeight: 50,
+            titleSpacing: MediaQuery.of(context).size.width*0.06,
+            title: Text("Profile", style: TextStyle(fontFamily: bold, fontSize: 23,color: Colors.white),),
           ),
           body: SafeArea(
             child: Container(
-              padding:   EdgeInsets.only(top: MediaQuery.of(context).size.height*0.02,left: 10,right: 10),
+              padding: EdgeInsets.only(top:5 ),
               child:  Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // here we are going to give a option of the EditProfile to the user
-                  const SizedBox(height: 15,),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      // here we are going to display the details of the User
-                      CircleAvatar(
-                        radius: MediaQuery.of(context).size.width*0.075,
+                  Align(
+                    alignment: Alignment.center,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      radius: MediaQuery.of(context).size.width*0.14,
+                      child: CircleAvatar(
+                          radius: MediaQuery.of(context).size.width*0.13,
                           backgroundImage: const AssetImage(imgB1)
                       ),
-                      const SizedBox(width: 5,),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                           Text(UserName, style: const TextStyle(fontFamily: bold, color: Colors.white,fontSize: 17),),
-
-                           Text(UserEmail, style: const TextStyle(color: Colors.white, fontSize: 14),)
-                         ],
-                      ),
-                      //Wea re going to define a logout Button
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white.withOpacity(0.1),
-                              elevation: 2,
-                            ),
-                            onPressed: () async{
-                              // also clearing the data stored inside the UserInfo functionality.
-                              UserEmail="";
-                              UserName="";
-                              UserMobileNo="";
-                              var autologin= Get.put(AutoLogin());
-                              // CLearing the data stored inside the UserAutoLogin
-                              await autologin.loggout();
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(builder: (context) => const SplashScreen()),
-                                    (Route<dynamic> route) => false, // Remove all previous routes
-                              );// Replaces all screens with HomeScreen
-                            },
-                            child: const Text(
-                              logout,
-                              style: TextStyle(color: Colors.white, fontFamily: 'bold', fontSize: 15),
-                            ),
-                          ),
-                        ),
-                      )
-
-                    ],
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height*0.02,),
-                  // now we are going to create a section that display the detials related to the orderHistory Etc
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      accountDetails(context: context,width: MediaQuery.of(context).size.width/3.25, count: cart_count.toString(), title: "In your cart"),
-                      accountDetails(context: context,width: MediaQuery.of(context).size.width/3.25, count: whilist_count.toString(), title: " your whilist"),
-                      accountDetails(context: context,width: MediaQuery.of(context).size.width/3.25, count: order_count.toString(), title: "In your Orders")
-                    ],
-                  ),
-                  const SizedBox(height: 40,),
-                  // we are going to build the button Sections also
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow:[
-                          BoxShadow(color: Colors.grey.withOpacity(0.5),spreadRadius: 5,blurRadius: 5)
-                        ],
-                        borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width*0.06),
                     ),
-                    padding: EdgeInsets.all(20),
-                    child: ListView.separated(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      separatorBuilder: (context,index){
-                        // this is the seperator that is used to seperate teh items
-                        return const Divider(
-                           color: textfieldGrey,
-                        );
-                      },
-                      itemCount: profileButtonList.length,
-                        itemBuilder: (BuildContext constext,int index){
-                        return GestureDetector(
-                          onTap: (){
-                            // we nee dto redirect to the My Orders Page which contains the info of the Previous orders
-
-                          },
-                          child: ListTile(
-                            leading: Image.asset(profileButtonIcon[index], width: 25,),
-                            title: Text(profileButtonList[index],style: const TextStyle(fontFamily: semibold, color: darkFontGrey,fontSize: 16),),
-
-                          ),
-                        );
-                    }),
+                  ),
+                  SizedBox(height: 10,),
+                  Container(
+                    width: MediaQuery.of(context).size.width*0.88,
+                    height: MediaQuery.of(context).size.height*0.65,
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                    margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.06),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                        spreadRadius: 5,
+                        blurRadius: 5,
+                        color: Colors.grey.withOpacity(0.5)
+                      )],
+                      color: Colors.white
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text("Vinay jain", style: const TextStyle(fontFamily: bold, color: Colors.red,fontSize: 30),),
+                        Text("jainv61787@gmail.com", style: const TextStyle(color: Colors.redAccent, fontSize: 16),),
+                        SizedBox(height: 20,),
+                        Expanded(
+                          child: ListView.separated(
+                              itemBuilder: (context,index)=>GestureDetector(
+                                onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> accountOptionsActions[index]));
+                                },
+                                child: ListTile(
+                                  horizontalTitleGap: 25,
+                                  leading: Icon(accountOptionsIcons[index],color: Colors.redAccent,size: 25,),
+                                  title: Text(accountOptionsList[index], style: TextStyle(color: fontGrey,fontSize: 18,fontFamily: semibold),),
+                                  trailing: Icon(Icons.arrow_forward,color: Colors.grey,),
+                                ),
+                              ),
+                              separatorBuilder:(context,index)=> Divider(
+                                color: Colors.grey,
+                              ),
+                              itemCount: accountOptionsList.length),
+                        ),
+                        SizedBox(height: 10,),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width*0.8,
+                          child: SubmitButton(
+                              context: context,
+                              color: redColor,
+                              textcolor: whiteColor,
+                              title: logout,
+                              onPress: () async {
+                                UserEmail = "";
+                                UserName = "";
+                                UserMobileNo = "";
+                                var autologin = Get.put(AutoLogin());
+                                // CLearing the data stored inside the UserAutoLogin
+                                await autologin.loggout();
+                                Navigator.pushAndRemoveUntil(context,
+                                  MaterialPageRoute(builder: (context) => const SplashScreen()), (Route<dynamic> route) => false, // Remove all previous routes);// Replaces all screens with HomeScreen
+                                );
+                              }
+                              ),
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),
