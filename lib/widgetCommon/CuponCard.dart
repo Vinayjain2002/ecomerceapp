@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../consts/colors.dart';
-import '../consts/styles.dart';
-import '../controllers/authController.dart';
+import '../features/authentication/controller/authController.dart';
+import '../utils/constants/colors.dart';
+import '../utils/constants/styles.dart';
 
 Widget CuponContainer({required BuildContext context}){
 

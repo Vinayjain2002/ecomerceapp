@@ -1,6 +1,7 @@
 
-import 'package:emart_app/consts/consts.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/constants/images.dart';
 //todo we need to make the corner rounded of the icon ie it is causing error when the .rounded is used after the padding
 
 Widget appLogoWidget(BuildContext context) {

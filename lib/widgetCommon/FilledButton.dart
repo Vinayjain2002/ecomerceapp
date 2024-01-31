@@ -1,7 +1,5 @@
-import 'package:emart_app/consts/colors.dart';
 import 'package:flutter/material.dart';
-
-import '../consts/styles.dart';
+import '../utils/constants/styles.dart';
 
 Widget BookItemButton({
   required BuildContext context,

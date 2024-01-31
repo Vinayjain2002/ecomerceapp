@@ -1,5 +1,6 @@
-import 'package:emart_app/consts/consts.dart';
 import 'package:flutter/material.dart';
+import '../utils/constants/colors.dart';
+import '../utils/constants/styles.dart';
 
 Widget homeButtons({required icon,String? title,onPress,width,height}){
   return Container(

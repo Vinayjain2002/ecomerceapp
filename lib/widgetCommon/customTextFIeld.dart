@@ -1,5 +1,8 @@
-import 'package:emart_app/consts/consts.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/constants/colors.dart';
+import '../utils/constants/strings.dart';
+import '../utils/constants/styles.dart';
 
 /// This is going to be the text fields where the user could enter their details
 //todo we need to define a eye that will allow to see the password entered by the user

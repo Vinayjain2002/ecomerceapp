@@ -1,5 +1,6 @@
-import 'package:emart_app/consts/consts.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/constants/images.dart';
 
 /// so this is the Widget to Show the small background that used to appear at the background of the Login Screens
 

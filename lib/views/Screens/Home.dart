@@ -1,15 +1,15 @@
-import 'package:emart_app/HomeScreen/HomeScreen.dart';
-import 'package:emart_app/categoryScreen/CategoryScreen.dart';
-import 'package:emart_app/consts/colors.dart';
-import 'package:emart_app/consts/consts.dart';
-import 'package:emart_app/controllers/homeController.dart';
+
+import 'package:emart_app/features/HomeScreen/controllers/homeController.dart';
+import 'package:emart_app/features/authentication/screens/AccountScreen.dart';
+import 'package:emart_app/features/shopped/screens/cartScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../CartScreen/cartScreen.dart';
-import '../../accountScreen/AccountScreen.dart';
-import '../../consts/images.dart';
-import '../../consts/strings.dart';
+import '../../features/HomeScreen/Screen/HomeScreen.dart';
+import '../../features/categoryBrowsed/screens/CategoryScreen.dart';
+import '../../utils/constants/colors.dart';
+import '../../utils/constants/images.dart';
+import '../../utils/constants/strings.dart';
+import '../../utils/constants/styles.dart';
 
 /// this is going to be the home screen of the app
 

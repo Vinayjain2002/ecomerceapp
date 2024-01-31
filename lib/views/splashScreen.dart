@@ -1,14 +1,14 @@
-import 'package:emart_app/authScreens/loginScreen.dart';
-import 'package:emart_app/consts/consts.dart';
+import 'package:emart_app/utils/constants/consts.dart';
 import 'package:emart_app/views/Screens/Home.dart';
 import 'package:emart_app/widgetCommon/appLogoWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../controllers/authController.dart';
+import '../features/authentication/controller/authController.dart';
+import '../features/authentication/screens/loginScreen.dart';
 import '../userData/userInfo.dart';
+import '../utils/constants/strings.dart';
 
 /// So here we use the VelocityX for the purpose of creating the layout and this page is the firstpage
 /// that is used to show the details of the app ie the version, logo, name etc.

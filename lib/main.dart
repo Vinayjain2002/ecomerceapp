@@ -1,11 +1,13 @@
+import 'package:emart_app/utils/theme/theme.dart';
 import 'package:emart_app/views/splashScreen.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/material.dart';
-import 'consts/consts.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+
+import 'utils/constants/strings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,17 +32,11 @@ class MyApp extends StatelessWidget {
       // going to remove the tag from the app
       debugShowCheckedModeBanner: false,
       title: appname,
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.transparent,
-        appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
-          fontFamily: regular,
-        tooltipTheme: TooltipThemeData(
-          textStyle: TextStyle(
-            color: Colors.grey,
-            fontSize: 16.0,
-          ),
-        ),
-      ),
+      //this is going to be select the theme mode of the system
+
+      themeMode: ThemeMode.system,
+      darkTheme: TAppTheme.darkTheme,
+      theme: TAppTheme.lightTheme,
       // we are going to show the splash Screen ie when the app starts
       home: SplashScreen(),
     );
