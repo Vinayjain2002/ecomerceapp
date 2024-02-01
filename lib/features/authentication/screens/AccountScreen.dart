@@ -12,11 +12,10 @@ import '../../../utils/constants/images.dart';
 import '../../../utils/constants/strings.dart';
 import '../../../utils/constants/styles.dart';
 import '../controller/autologin.dart';
+import '../models/AccountsLIst.dart';
 
 
 class AccountScreen extends StatelessWidget {
-  final accountOptionsActions=[];
-  // [OrdersScreen(),WhilistScreen(),CuponsScreen(),HelpCenterScreen(),EditProfileScreen()];
    AccountScreen({super.key});
 
   @override

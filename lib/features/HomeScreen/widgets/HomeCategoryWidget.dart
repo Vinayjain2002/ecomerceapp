@@ -9,11 +9,6 @@ Widget HomeCategory({required context}){
     width: MediaQuery.of(context).size.width*1,
     decoration: BoxDecoration(
       color: lightGrey,
-      border: Border.all(
-        width: 1,
-        color: Colors.grey,
-      ),
-      borderRadius: BorderRadius.circular(10)
     ),
     child: Column(
       children: <Widget>[

@@ -19,7 +19,7 @@ class TAppTheme{
     primaryColor: redColor,
     textTheme: TTextTheme.lightTheme,
     elevatedButtonTheme: TElevatedBtnTheme.lightELevatedBtnTheme,
-    // appBarTheme: TAppBarTheme.LightAppBarTheme,
+    appBarTheme: TAppBarTheme.LightAppBarTheme,
     tooltipTheme: const TooltipThemeData( textStyle: TextStyle(color: Colors.grey, fontSize: 16.0),),
     bottomSheetTheme: TBottomSheetTheme.LightBottomSheetData,
 

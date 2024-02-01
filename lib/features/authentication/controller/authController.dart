@@ -11,7 +11,6 @@ import '../../../utils/constants/consts.dart';
 class AuthController extends GetxController{
   var isLoading= false.obs;
   var viewDetails=false.obs;
-  var tapToApply=false.obs;
 
   //login Method with the help of the email and the password. and the firebase authentication.
   Future<String?> loginMethod({
